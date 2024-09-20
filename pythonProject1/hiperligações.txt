@@ -1,0 +1,2 @@
+Jogar
+C:\Users\raulm\Documents\github projects\setup\pythonProject1\gaming.txt
