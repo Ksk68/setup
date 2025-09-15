@@ -95,27 +95,23 @@ C:\Users\nome\Musica\melhores.txt
 def remover_setup(nome:str):
     pass
 
-
 def ler_hiper():
     txt = r"C:\setup\pythonProject1\hiperligações.txt"
-    nomes = ""
+    nomes = []
     hiperligacoes = []
-    quantidade = 0
-    sair = False
+
     with open(txt, 'r', encoding='utf-8') as arquivo:
-        while sair != True:
-            nome = arquivo.readline().strip()
-            if not nome:
-                sair = True
-            else:
-                if quantidade == 0:
-                    nomes = nome
-                else:
-                    nomes = nomes + "," + nome
-                hiperligacao = arquivo.readline().strip()
-                hiperligacoes.append(hiperligacao)
-                quantidade = quantidade + 1
-    return nomes,hiperligacoes,quantidade
+        linhas = [linha.strip() for linha in arquivo if linha.strip()]  # remove linhas vazias
+
+    # Assume pares: nome numa linha, hiperligação na seguinte
+    for i in range(0, len(linhas), 2):
+        nome = linhas[i]
+        if i + 1 < len(linhas):  # garante que há uma hiperligação correspondente
+            hiper = linhas[i + 1]
+            nomes.append(nome)
+            hiperligacoes.append(hiper)
+
+    return ",".join(nomes), hiperligacoes, len(nomes)
 
 
 #main
